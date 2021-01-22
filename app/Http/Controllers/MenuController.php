@@ -6,17 +6,37 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function getNameBySlug($slug):string
+
+    public function getNameBySlugAndProduct($slug,$product):array
     {
-        $title  =   '';
+        $arr    =   [];
         $menu   =   $this->menu();
         foreach ($menu as &$value) {
-            if ($value['url'] === ('/'.$slug)) {
-                $title  =   $value['title'];
+            if ($value['url'] === ('/'.$slug) || $value['url'] === $slug) {
+                $list   =   $this->subMenu($value['id']);
+                foreach ($list as &$val) {
+                    if ($val['url'] === ('/'.$product) || $val['url'] === $product) {
+                        $arr    =   [[$value['title'],$value['url']],[$val['title'],$val['url']]];
+                        break;
+                    }
+                }
                 break;
             }
         }
-        return $title;
+        return $arr;
+    }
+
+    public function getNameBySlug($slug):array
+    {
+        $arr    =   [];
+        $menu   =   $this->menu();
+        foreach ($menu as &$value) {
+            if ($value['url'] === ('/'.$slug) || $value['url'] === $slug) {
+                $arr    =   [$value['title'],$value['url']];
+                break;
+            }
+        }
+        return $arr;
     }
 
     public function list():array
