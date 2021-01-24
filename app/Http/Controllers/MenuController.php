@@ -7,6 +7,84 @@ use Illuminate\Http\Request;
 class MenuController extends Controller
 {
 
+    public function footer():array
+    {
+        return [
+            'regions'   =>  $this->regions(),
+            'menu'      =>  $this->footerMenu()
+        ];
+    }
+
+    public function regions():array
+    {
+        return [
+            [
+                'title' =>  'Алматы'
+            ],
+            [
+                'title' =>  'Нур-Султан',
+            ],
+            [
+                'title' =>  'Шымкент',
+            ],
+            [
+                'title' =>  'Актау',
+            ],
+            [
+                'title' =>  'Атырау',
+            ],
+            [
+                'title' =>  'Караганды',
+            ]
+        ];
+    }
+
+    public function footerMenu():array
+    {
+        return [
+            [
+                'url'   =>  '/about',
+                'title' =>  'О компании'
+            ],
+            [
+                'url'   =>  '/partner',
+                'title' =>  'Стать партнёром'
+            ],
+            [
+                'url'   =>  '/contacts',
+                'title' =>  'Контакты'
+            ],
+            [
+                'url'   =>  '/courier',
+                'title' =>  'Стать курьером',
+            ],
+            [
+                'url'   =>  '/delivery',
+                'title' =>  'Доставка',
+            ],
+            [
+                'url'   =>  '/business',
+                'title' =>  'Для бизнеса',
+            ],
+            [
+                'url'   =>  '/terms',
+                'title' =>  'Пользовательское соглашение',
+            ],
+            [
+                'url'   =>  '/recycling',
+                'title' =>  'Переработка пластика',
+            ],
+            [
+                'url'   =>  '/faq',
+                'title' =>  'Вопросы и ответы',
+            ],
+            [
+                'url'   =>  '/feedback',
+                'title' =>  'Обратная связь'
+            ]
+        ];
+    }
+
     public function getNameBySlugAndProduct($slug,$product):array
     {
         $arr    =   [];

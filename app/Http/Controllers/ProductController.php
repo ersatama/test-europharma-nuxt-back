@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
 
+    const LIMIT =   100;
+
     public function getProductsByMenuAndProduct($slug,$product):array
     {
         $arr    =   [];
@@ -33,10 +35,20 @@ class ProductController extends Controller
         return $arr;
     }
 
-    public function popular():array
+    public function getLimit($request): int
     {
+        $limit  =   self::LIMIT;
+        if ($request->has('limit')) {
+            $limit  =   (int)$request->input('limit');
+        }
+        return $limit;
+    }
+
+    public function popular(Request $request):array
+    {
+        $limit  =   $this->getLimit($request);
         $arr    =   [];
-        for ($i=0;$i < 100; $i++) {
+        for ($i=0;$i < $limit; $i++) {
             $arr[]  =   $this->getById($i);
         }
         return $arr;

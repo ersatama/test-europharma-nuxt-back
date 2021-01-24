@@ -13,3 +13,5 @@ Route::get('/web/products/slug/{slug}','App\Http\Controllers\ProductController@g
 Route::get('/web/products/slug/{slug}/{product}','App\Http\Controllers\ProductController@getProductsByMenuAndProduct');
 
 Route::get('/web/stories','App\Http\Controllers\StoryController@all');
+
+Route::get('/web/footer','App\Http\Controllers\MenuController@footer');
