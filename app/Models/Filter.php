@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\MenuContract;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Contracts\FilterContract;
@@ -35,7 +36,10 @@ class Filter extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
+    public function menu()
+    {
+        return $this->hasMany(Menu::class,MenuContract::ID,FilterContract::MENU_ID);
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

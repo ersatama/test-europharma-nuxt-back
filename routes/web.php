@@ -12,6 +12,8 @@ Route::get('/web/products/special','App\Http\Controllers\ProductController@speci
 //Route::get('/web/products/slug/{slug}','App\Http\Controllers\ProductController@getProductsByMenu');
 Route::get('/web/products/slug/{slug}/{product}','App\Http\Controllers\ProductController@getProductsByMenuAndProduct');
 
+Route::get('/web/products/category/{category}','App\Http\Controllers\ProductController@getProductsByCategory');
+
 Route::get('/web/stories','App\Http\Controllers\StoryController@all');
 
 Route::get('/web/footer','App\Http\Controllers\MenuController@footer');

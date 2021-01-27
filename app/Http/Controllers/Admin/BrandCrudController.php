@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Contracts\MenuContract;
-use App\Http\Requests\FilterRequest;
-use App\Models\Filter;
+use App\Contracts\BrandContract;
+use App\Http\Requests\BrandRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use App\Contracts\FilterContract;
+
 /**
- * Class FilterCrudController
+ * Class BrandCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class FilterCrudController extends CrudController
+class BrandCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -24,7 +23,7 @@ class FilterCrudController extends CrudController
     protected function setupReorderOperation()
     {
         // define which model attribute will be shown on draggable elements
-        $this->crud->set('reorder.label', FilterContract::TITLE);
+        $this->crud->set('reorder.label', BrandContract::TITLE);
         // define how deep the admin is allowed to nest the items
         // for infinite levels, set it to 0
         $this->crud->set('reorder.max_level', 1);
@@ -36,9 +35,10 @@ class FilterCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Filter::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/filter');
-        CRUD::setEntityNameStrings('Фильтр', 'Фильтр');
+        CRUD::setModel(\App\Models\Brand::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/brand');
+        CRUD::setEntityNameStrings('Бренд', 'Бренд');
+        $this->crud->setRequiredFields(BrandRequest::class);
     }
 
     /**
@@ -49,11 +49,10 @@ class FilterCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        //CRUD::setFromDb(); // columns
-        CRUD::column(FilterContract::MENU_ID)->type('select')->label('Меню')
-            ->entity('menu')->model('App\Models\Menu')->attribute(MenuContract::TITLE);
-        CRUD::column(FilterContract::TITLE)->type('text')->label('Заголовок');
-        CRUD::column(FilterContract::STATUS)->type('enum')->label('Статус');
+        CRUD::column(BrandContract::TITLE)->type('text')->label('Бренд');
+        CRUD::column(BrandContract::ICON)->type('image')->label('Иконка');
+        CRUD::column(BrandContract::IMG)->type('image')->label('Картинка');
+        CRUD::column(BrandContract::STATUS)->type('enum')->label('Статус');
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -69,30 +68,51 @@ class FilterCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(FilterRequest::class);
+        CRUD::setValidation(BrandRequest::class);
 
         $this->crud->addFields([
             [
-                'name'  => FilterContract::MENU_ID,
-                'label' => 'Меню',
-                'type'  => 'select',
-                'entity'    => 'menu',
-                'model'     => "App\Models\Menu",
-                'attribute' => FilterContract::TITLE,
-            ]
-        ]);
-
-        $this->crud->addFields([
-            [
-                'name'  => FilterContract::TITLE,
+                'name'  => BrandContract::TITLE,
                 'label' => 'Заголовок',
-                'type'  => 'text'
+                'type'  => 'text',
+                'attributes' => [
+                    'required' => true,
+                ],
+                'wrapper' => [
+                    'required' => true
+                ],
             ]
         ]);
 
         $this->crud->addFields([
             [
-                'name'  => FilterContract::STATUS,
+                'name'  => BrandContract::ICON,
+                'label' => 'Загрузите иконку',
+                'type'  => 'image',
+                'crop'    =>  false,
+                //'disk'  =>  'uploads',
+                'attributes' => [
+                    'accept'    =>  'image/jpeg,image/jpg,image/png,image/gif'
+                ],
+            ]
+        ]);
+
+        $this->crud->addFields([
+            [
+                'name'  => BrandContract::IMG,
+                'label' => 'Загрузите Картинку',
+                'type'  => 'image',
+                'crop'    =>  false,
+                //'disk'  =>  'uploads',
+                'attributes' => [
+                    'accept'    =>  'image/jpeg,image/jpg,image/png,image/gif'
+                ],
+            ]
+        ]);
+
+        $this->crud->addFields([
+            [
+                'name'  => BrandContract::STATUS,
                 'label' => 'Статус',
                 'type'  => 'enum'
             ]

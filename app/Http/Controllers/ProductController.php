@@ -2,17 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\CategoryContract;
+use App\Contracts\MenuContract;
 use Illuminate\Http\Request;
+use App\Repositories\Catalog\CatalogRepositoryEloquent as Catalog;
+use App\Repositories\Category\CategoryRepositoryEloquent as Category;
+use App\Repositories\Menu\MenuRepositoryEloquent as Menu;
+use App\Repositories\Product\ProductRepositoryEloquent as Product;
 
 class ProductController extends Controller
 {
 
     const LIMIT =   100;
+    protected $catalog;
+    protected $category;
+    protected $menu;
+    protected $product;
+
+    protected $skip =   0;
+    protected $take =   100;
+
+    public function __construct() {
+        $this->catalog  =   new Catalog();
+        $this->category =   new Category();
+        $this->menu     =   new Menu();
+        $this->product  =   new Product();
+    }
+
+    public function getProductsByCategory($category):array
+    {
+
+        $arr        =   $this->product->structure($this->skip,$this->take);
+        $category   =   $this->category->getBySlug($category);
+
+        if ($category) {
+            $menu   =   $this->menu->getByCategoryIdWithFilter($category[CategoryContract::ID]);
+            foreach ($menu as &$item) {
+                foreach ($item['filter'] as &$filter) {
+                    $arr['filter']['options'][$filter['id']]   =   $filter;
+                }
+            }
+        }
+
+        return $this->product->getProductsByFilter($arr);
+    }
 
     public function getProductsByMenuAndProduct($slug,$product):array
     {
         $arr    =   [];
-        for ($i=0;$i < 100; $i++) {
+        for ($i = 0;$i < 100; $i++) {
             $arr[]  =   $this->getById($i);
         }
         return $arr;

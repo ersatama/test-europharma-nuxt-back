@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\CategoryContract;
+use App\Contracts\MenuContract;
 use App\Models\Category;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 use App\Models\Catalog;
@@ -128,37 +130,17 @@ class MenuController extends Controller
         return $arr;
     }
 
-    public function list():array
+    public function list(int $id):array
     {
-        return [
-            [
-                'title' =>  'Android',
-                'url'   =>  '/android'
-            ],
-            [
-                'title' =>  'iPhone',
-                'url'   =>  '/iphone'
-            ],
-            [
-                'title' =>  'Беспроводная зарядка',
-                'url'   =>  '/wireless_charger'
-            ],
-            [
-                'title' =>  '120 Гц Экран',
-                'url'   =>  '/120hz_screen'
-            ],
-            [
-                'title' =>  'Snapdragon 855+',
-                'url'   =>  '/snapdragon_855'
-            ]
-        ];
+        return Menu::where([[MenuContract::CATEGORY_ID,$id],[MenuContract::STATUS,MenuContract::ACTIVE]])
+            ->orderBy(MenuContract::TITLE)->get()->toArray();
     }
 
     public function subMenu(int $id):array
     {
         $categories =   Category::where(CategoryContract::CATALOG_ID,$id)->get()->toArray();
         foreach ($categories as &$category) {
-            $category['list']   =   $this->list();
+            $category['list']   =   $this->list($category['id']);
         }
         return $categories;
     }

@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Contracts\CategoryContract;
-use App\Contracts\FilterContract;
+use App\Contracts\MenuContract;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
-use App\Contracts\MenuContract;
+use App\Contracts\ProductContract;
 
-class Menu extends Model
+class Product extends Model
 {
     use CrudTrait;
 
@@ -18,11 +17,11 @@ class Menu extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table    =   MenuContract::TABLE;
+    protected $table    =   ProductContract::TABLE;
     // protected $primaryKey = 'id';
     // public $timestamps = false;
-    protected $guarded  =   [MenuContract::ID];
-    protected $fillable =   MenuContract::FILLABLE;
+    protected $guarded  =   [ProductContract::ID];
+    protected $fillable =   ProductContract::FILLABLE;
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -37,12 +36,9 @@ class Menu extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function category() {
-        return $this->hasMany(Category::class,CategoryContract::ID,MenuContract::CATEGORY_ID);
-    }
-
-    public function filter() {
-        return $this->hasMany(Filter::class,FilterContract::MENU_ID,MenuContract::ID);
+    public function menu()
+    {
+        return $this->belongsToMany(Menu::class,MenuContract::ID,ProductContract::MENU_ID);
     }
     /*
     |--------------------------------------------------------------------------
