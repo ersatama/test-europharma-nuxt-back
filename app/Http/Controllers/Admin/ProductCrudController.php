@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Contracts\BrandContract;
 use App\Contracts\MenuContract;
 use App\Http\Requests\ProductRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -16,6 +17,7 @@ class ProductCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -73,116 +75,105 @@ class ProductCrudController extends CrudController
     {
         CRUD::setValidation(ProductRequest::class);
 
-        $this->crud->addFields([
-            [
-                'name'  => ProductContract::MENU_ID,
-                'label' => 'Меню',
-                'type'  => 'select',
-                'entity'    => 'menu',
-                'model'     => "App\Models\Menu",
-                'attribute' => MenuContract::TITLE,
+        $this->crud->addField([
+            'name'  => ProductContract::MENU_ID,
+            'label' => 'Меню',
+            'type'  => 'select',
+            'entity'    => 'menu',
+            'model'     => "App\Models\Menu",
+            'attribute' => MenuContract::TITLE,
+        ]);
+
+        $this->crud->addField([
+            'name'  => ProductContract::BRAND_ID,
+            'label' => 'Бренд (не обязательно)',
+            'type'  => 'select',
+            'entity'    => 'brand',
+            'model'     => "App\Models\Brand",
+            'attribute' => BrandContract::TITLE,
+        ]);
+
+        $this->crud->addField([
+            'name'  => ProductContract::BARCODE,
+            'label' => 'Штрих - код',
+            'type'  => 'text'
+        ]);
+
+        $this->crud->addField([
+            'name'  => ProductContract::URL,
+            'label' => 'Ссылка',
+            'type'  => 'text'
+        ]);
+
+        $this->crud->addField([
+            'name'  => ProductContract::TITLE,
+            'label' => 'Заголовок',
+            'type'  => 'text'
+        ]);
+
+        $this->crud->addField([
+            'name'  => ProductContract::DESCRIPTION,
+            'label' => 'Описание (не обязательно)',
+            'type'  => 'textarea'
+        ]);
+
+        $this->crud->addField([
+            'name'  => ProductContract::PRICE,
+            'label' => 'Цена',
+            'type'  => 'number'
+        ]);
+
+        $this->crud->addField([
+            'name'  => ProductContract::DISCOUNT,
+            'label' => 'Цена со скидкой (не обязательно)',
+            'type'  => 'number'
+        ]);
+
+        $this->crud->addField([
+            'name'  => ProductContract::LIMIT,
+            'label' => 'Лимит на клик',
+            'type'  => 'number',
+            'value' =>  1
+        ]);
+
+        $this->crud->addField([
+            'name'  =>  ProductContract::TYPE,
+            'label' =>  'Тип количества',
+            'type'  =>  'text',
+            'value' =>  'шт',
+            'attributes'    =>  [
+                'placeholder' =>  'штук,пачка или пакет и тд'
             ]
         ]);
 
-        $this->crud->addFields([
-            [
-                'name'  => ProductContract::BARCODE,
-                'label' => 'Штрих - код',
-                'type'  => 'text'
-            ]
+        $this->crud->addField([
+            'name'  => ProductContract::QUANTITY,
+            'label' => 'Товар в наличии',
+            'type'  => 'number'
         ]);
 
-        $this->crud->addFields([
-            [
-                'name'  => ProductContract::URL,
-                'label' => 'Ссылка',
-                'type'  => 'text'
-            ]
+        $this->crud->addField([
+            'name'  => ProductContract::ECLUB,
+            'label' => 'Цена eClub (не обязательно)',
+            'type'  => 'number'
         ]);
 
-        $this->crud->addFields([
-            [
-                'name'  => ProductContract::TITLE,
-                'label' => 'Заголовок',
-                'type'  => 'text'
-            ]
+        $this->crud->addField([
+            'name'  => ProductContract::ECLUB_DISCOUNT,
+            'label' => 'Цена eClub скидка (не обязательно)',
+            'type'  => 'number'
         ]);
 
-        $this->crud->addFields([
-            [
-                'name'  => ProductContract::DESCRIPTION,
-                'label' => 'Описание',
-                'type'  => 'textarea'
-            ]
+        $this->crud->addField([
+            'name'  => ProductContract::ECLUB_LIMIT,
+            'label' => 'eClub лимит (не обязательно)',
+            'type'  => 'number'
         ]);
 
-        $this->crud->addFields([
-            [
-                'name'  => ProductContract::PRICE,
-                'label' => 'Цена',
-                'type'  => 'number'
-            ]
-        ]);
-
-        $this->crud->addFields([
-            [
-                'name'  => ProductContract::DISCOUNT,
-                'label' => 'Цена со скидкой',
-                'type'  => 'number'
-            ]
-        ]);
-
-        $this->crud->addFields([
-            [
-                'name'  => ProductContract::LIMIT,
-                'label' => 'Лимит на клик',
-                'type'  => 'number',
-                'value' =>  1
-            ]
-        ]);
-
-        $this->crud->addFields([
-            [
-                'name'  =>  ProductContract::TYPE,
-                'label' =>  'Тип количества',
-                'type'  =>  'text',
-                'value' =>  'шт',
-                'attributes'    =>  [
-                    'placeholder' =>  'штук,пачка или пакет и тд'
-                ]
-            ]
-        ]);
-
-        $this->crud->addFields([
-            [
-                'name'  => ProductContract::QUANTITY,
-                'label' => 'Товар в наличии',
-                'type'  => 'number'
-            ]
-        ]);
-
-        $this->crud->addFields([
-            [
-                'name'  => ProductContract::ECLUB,
-                'label' => 'Цена eClub',
-                'type'  => 'number'
-            ]
-        ]);
-
-        $this->crud->addFields([
-            [
-                'name'  => ProductContract::ECLUB_DISCOUNT,
-                'label' => 'Цена eClub скидка',
-                'type'  => 'number'
-            ]
-        ]);
-
-        $this->crud->addFields([
-            [
-                'name'  => ProductContract::ECLUB_LIMIT,
-                'label' => 'eClub лимит',
-                'type'  => 'number'
-            ]
+        $this->crud->addField([
+            'name'  => ProductContract::ECLUB_LIMIT,
+            'label' => 'eClub лимит (не обязательно)',
+            'type'  => 'number'
         ]);
 
 
@@ -204,5 +195,19 @@ class ProductCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+
+        $this->crud->addField([
+            'label' => 'Характеристики',
+            'type'  => 'relationship',
+            'name'  => 'characteristics', // the method on your model that defines the relationship
+            'readonly'  =>  true,
+            'ajax'  => true,
+            'inline_create' => [
+                'entity' => 'characteristic',
+                'force_select' => true,
+                'include_main_form_fields' => [ProductContract::ID,ProductContract::MENU_ID]
+            ]
+        ]);
     }
+
 }

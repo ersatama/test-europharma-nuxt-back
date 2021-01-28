@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\CategoryContract;
+use App\Contracts\FilterContract;
 use App\Contracts\MenuContract;
 use Illuminate\Http\Request;
 use App\Repositories\Catalog\CatalogRepositoryEloquent as Catalog;
@@ -45,6 +46,19 @@ class ProductController extends Controller
         }
 
         return $this->product->getProductsByFilter($arr);
+    }
+
+    public function filterCreate(Request $request) {
+        if ($request->has('main_form_fields')) {
+            $menu   =   $request->input('main_form_fields')[0]['value'];
+            return \App\Models\Filter::where(FilterContract::MENU_ID,$menu)
+                ->get()->toArray();
+        }
+        return [];
+    }
+
+    public function filterCreateSave() {
+
     }
 
     public function getProductsByMenuAndProduct($slug,$product):array

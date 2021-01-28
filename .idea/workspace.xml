@@ -2,33 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a8da848-8a7f-48a1-81f5-1c5468eb24fa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Contracts/BrandContract.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Contracts/ProductContract.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/BrandCrudController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/BrandRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Brand.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/Catalog/CatalogRepositoryEloquent.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/Catalog/CatalogRepositoryInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/Category/CategoryRepositoryEloquent.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/Category/CategoryRepositoryInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/Menu/MenuRepositoryEloquent.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/Menu/MenuRepositoryInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/Product/ProductRepositoryEloquent.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/Product/ProductRepositoryInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_27_095827_brands.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_27_123812_products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/backend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Contracts/CharacteristicContract.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Contracts/DefaultValueContract.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/CharacteristicCrudController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/DefaultValueCrudController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/CharacteristicRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/DefaultValueRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Characteristic.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/DefaultValue.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_28_080904_characteristics.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_28_123903_default_values.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Contracts/MainContract.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Contracts/MainContract.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/FilterCrudController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/FilterCrudController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MenuController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MenuController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Contracts/ProductContract.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Contracts/ProductContract.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/MenuCrudController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/MenuCrudController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductCrudController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductCrudController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Filter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Filter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_27_123812_products.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_27_123812_products.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/vendor/backpack/base/inc/sidebar_content.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/backpack/base/inc/sidebar_content.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/backpack/custom.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/backpack/custom.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
@@ -202,6 +195,11 @@
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.composer" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\open_server_5_3_7_full\OpenServer\domains\backend\resources\views\vendor\backpack\crud" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
@@ -225,7 +223,7 @@
       <workItem from="1611295564824" duration="15903000" />
       <workItem from="1611569484033" duration="763000" />
       <workItem from="1611571627948" duration="10573000" />
-      <workItem from="1611643379843" duration="31722000" />
+      <workItem from="1611643379843" duration="56886000" />
     </task>
     <servers />
   </component>

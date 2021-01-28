@@ -23,13 +23,16 @@ interface MainContract
 
     const LIMIT         =   'limit';
     const QUANTITY      =   'quantity';
-    const TYPE          =   'type';
+    const TYPE          =   'quantity_type';
 
     const IMG           =   'img';
     const ICON          =   'icon';
     const ICON_PATH     =   'public/storage/icon';
     const IMG_PATH      =   'public/storage/img';
 
+    const PRODUCT_ID    =   'product_id';
+    const FILTER_ID     =   'filter_id';
+    const BRAND_ID      =   'brand_id';
     const CATALOG_ID    =   'catalog_id';
     const CATEGORY_ID   =   'category_id';
     const MENU_ID       =   'menu_id';

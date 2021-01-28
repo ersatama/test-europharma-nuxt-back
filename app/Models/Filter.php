@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Contracts\CharacteristicContract;
+use App\Contracts\DefaultValueContract;
 use App\Contracts\MenuContract;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -39,6 +41,14 @@ class Filter extends Model
     public function menu()
     {
         return $this->hasMany(Menu::class,MenuContract::ID,FilterContract::MENU_ID);
+    }
+
+    public function characteristic() {
+        return $this->belongsTo(Characteristic::class,CharacteristicContract::FILTER_ID,FilterContract::ID);
+    }
+
+    public function defaultValue() {
+        return $this->hasMany(DefaultValue::class,DefaultValueContract::FILTER_ID,FilterContract::ID);
     }
     /*
     |--------------------------------------------------------------------------

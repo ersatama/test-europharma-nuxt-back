@@ -2,15 +2,12 @@
 
 namespace App\Models;
 
-use App\Contracts\BrandContract;
-use App\Contracts\CharacteristicContract;
 use App\Contracts\FilterContract;
-use App\Contracts\MenuContract;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
-use App\Contracts\ProductContract;
+use App\Contracts\DefaultValueContract;
 
-class Product extends Model
+class DefaultValue extends Model
 {
     use CrudTrait;
 
@@ -20,11 +17,11 @@ class Product extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table    =   ProductContract::TABLE;
+    protected $table    =   DefaultValueContract::TABLE;
     // protected $primaryKey = 'id';
     // public $timestamps = false;
-    protected $guarded  =   [ProductContract::ID];
-    protected $fillable =   ProductContract::FILLABLE;
+    protected $guarded  =   [DefaultValueContract::ID];
+    protected $fillable =   DefaultValueContract::FILLABLE;
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -39,19 +36,8 @@ class Product extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function characteristics()
-    {
-        return $this->hasMany(Characteristic::class,CharacteristicContract::PRODUCT_ID);
-    }
-
-    public function menu()
-    {
-        return $this->belongsTo(Menu::class,ProductContract::MENU_ID);
-    }
-
-    public function brand()
-    {
-        return $this->belongsTo(Brand::class,ProductContract::BRAND_ID);
+    public function filter() {
+        return $this->belongsTo(Filter::class,FilterContract::FILTER_ID,DefaultValueContract::ID);
     }
     /*
     |--------------------------------------------------------------------------

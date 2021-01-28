@@ -16,8 +16,8 @@ class Products extends Migration
     {
         Schema::create(ProductContract::TABLE, function (Blueprint $table) {
             $table->id();
-            $table->bigInteger(ProductContract::MENU_ID);
-
+            $table->bigInteger(ProductContract::MENU_ID)->nullable();
+            $table->bigInteger(ProductContract::BRAND_ID)->nullable();
             $table->string(ProductContract::BARCODE)->unique();
             $table->string(ProductContract::URL)->unique();
             $table->string(ProductContract::TITLE)->nullable();
@@ -26,6 +26,7 @@ class Products extends Migration
             $table->string(ProductContract::DISCOUNT)->nullable();
             $table->string(ProductContract::LIMIT)->nullable();
             $table->string(ProductContract::QUANTITY)->nullable();
+            $table->string(ProductContract::TYPE)->nullable();
 
             $table->string(ProductContract::ECLUB)->nullable();
             $table->string(ProductContract::ECLUB_LIMIT)->nullable();

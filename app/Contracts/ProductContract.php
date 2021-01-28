@@ -9,6 +9,7 @@ class ProductContract implements MainContract
     const TABLE     =   'products';
     const FILLABLE  =   [
         self::MENU_ID,
+        self::BRAND_ID,
         self::BARCODE,
         self::URL,
         self::TITLE,

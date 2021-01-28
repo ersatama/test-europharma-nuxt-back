@@ -10,6 +10,9 @@
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('filter') }}'><i class='nav-icon la la-filter'></i> Фильтр</a></li>
 
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('defaultvalue') }}'><i class='nav-icon la la-filter'></i> Значения</a></li>
+
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('brand') }}'><i class='nav-icon la la-apple'></i> Бренды</a></li>
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('product') }}'><i class='nav-icon las la-clipboard-list'></i> Продукты</a></li>
+

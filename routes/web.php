@@ -17,3 +17,6 @@ Route::get('/web/products/category/{category}','App\Http\Controllers\ProductCont
 Route::get('/web/stories','App\Http\Controllers\StoryController@all');
 
 Route::get('/web/footer','App\Http\Controllers\MenuController@footer');
+
+//Route::post('/characteristic-inline-create','App\Http\Controllers\ProductController@filterCreate')->name('characteristic-inline-create');
+//Route::post('/characteristic-inline-create-save','App\Http\Controllers\ProductController@filterCreateSave')->name('characteristic-inline-create-save');
