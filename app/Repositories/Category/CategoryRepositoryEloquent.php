@@ -8,11 +8,15 @@ use App\Contracts\CategoryContract;
 
 class CategoryRepositoryEloquent implements CategoryRepositoryInterface
 {
+
     public function getBySlug(string $slug):array
     {
-        $category   =   Category::where([[CategoryContract::URL,'/'.$slug],[CategoryContract::STATUS,CategoryContract::ACTIVE]])->first();
-        if ($category) {
-            return  $category->toArray();
+        $categories =   Category::where([
+            [CategoryContract::URL,'/'.$slug],
+            [CategoryContract::STATUS,CategoryContract::ACTIVE]
+        ])->first();
+        if (sizeof($categories) > 0) {
+            return  $categories->toArray();
         }
         return [];
     }

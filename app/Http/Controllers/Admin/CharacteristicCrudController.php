@@ -118,7 +118,7 @@ class CharacteristicCrudController extends CrudController
                 ->get()->toArray();
             $arr    =   [];
             foreach ($defaultValues as &$defaultValue) {
-                $arr[]  =   $defaultValue[DefaultValueContract::TITLE];
+                $arr[$defaultValue[DefaultValueContract::TITLE]]    =   $defaultValue[DefaultValueContract::TITLE];
             }
             if ($arr) {
                 asort($arr);
@@ -136,8 +136,6 @@ class CharacteristicCrudController extends CrudController
                     'type'          =>  'text',
                 ]);
             }
-
-
         }
 
 
@@ -152,7 +150,44 @@ class CharacteristicCrudController extends CrudController
 
      protected function setupInlineCreateOperation()
      {
-         $this->setupCreateOperation();
+         $path   =   explode('/',$_SERVER['PATH_INFO']);
+         if (end($path) === 'modal') {
+             $this->setupCreateOperation();
+         } else {
+             $productId =   $_POST[CharacteristicContract::PRODUCT_ID];
+             Characteristic::where(CharacteristicContract::PRODUCT_ID,$productId)->update([
+                 CharacteristicContract::STATUS =>  CharacteristicContract::INACTIVE
+             ]);
+             foreach ($_POST as $key=>$value) {
+                 if (str_starts_with($key, 'category')) {
+                    $id =   explode('-',$key);
+                    $id =   end($id);
+                    $characteristic =   Characteristic::where([
+                        [CharacteristicContract::PRODUCT_ID,$productId],
+                        [CharacteristicContract::FILTER_ID,$id]
+                    ])->first();
+                    if ($characteristic) {
+                        Characteristic::where([
+                            [CharacteristicContract::PRODUCT_ID,$productId],
+                            [CharacteristicContract::FILTER_ID,$id]
+                        ])->update([
+                            CharacteristicContract::TITLE   =>  $value,
+                            CharacteristicContract::STATUS  =>  CharacteristicContract::ACTIVE
+                        ]);
+                    } else {
+                        Characteristic::create([
+                            CharacteristicContract::PRODUCT_ID  =>  $productId,
+                            CharacteristicContract::FILTER_ID   =>  $id,
+                            CharacteristicContract::TITLE       =>  $value,
+                            CharacteristicContract::STATUS      =>  CharacteristicContract::ACTIVE
+                        ]);
+                    }
+                 }
+             }
+             /*
+              {"success":true,"data":{"character_id":1,"character_value":"12","price":"1200","enabled":"1","updated_at":"2021-01-29T07:17:28.000000Z","created_at":"2021-01-29T07:17:28.000000Z","id":1,"character":{"id":1,"name":"\u0420\u0430\u0437\u043c\u0435\u0440","character_unit":"\u0441\u043c","parent_id":null,"enabled":1,"created_at":"2021-01-29T07:17:13.000000Z","updated_at":"2021-01-29T07:17:13.000000Z"}},"redirect_url":"http:\/\/pizza-express.io\/admin\/product\/create","referrer_url":false}
+              */
+         }
      }
 
 

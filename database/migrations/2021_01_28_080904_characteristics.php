@@ -28,6 +28,7 @@ class Characteristics extends Migration
             $table->index(CharacteristicContract::PRODUCT_ID);
             $table->index(CharacteristicContract::FILTER_ID);
             $table->index(CharacteristicContract::PARENT_ID);
+            $table->index(CharacteristicContract::TITLE);
         });
     }
 

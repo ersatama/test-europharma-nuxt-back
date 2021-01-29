@@ -4,15 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Contracts\CategoryContract;
 use App\Contracts\MenuContract;
+use App\Contracts\ProductContract;
 use App\Models\Category;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 
 use App\Models\Catalog;
 use App\Contracts\CatalogContract;
+use App\Repositories\Product\ProductRepositoryEloquent as ProductEloquent;
+use App\Repositories\Category\CategoryRepositoryEloquent as CategoryEloquent;
+use App\Repositories\Menu\MenuRepositoryEloquent as MenuEloquent;
+use App\Repositories\Filter\FilterRepositoryEloquent as FilterEloquent;
 
 class MenuController extends Controller
 {
+    protected $product;
+    protected $category;
+    protected $menu;
+    protected $filter;
+    protected $skip =   0;
+    protected $take =   100;
+
+    public function __construct() {
+        $this->product  =   new ProductEloquent();
+        $this->category =   new CategoryEloquent();
+        $this->menu     =   new MenuEloquent();
+        $this->filter   =   new FilterEloquent();
+    }
 
     public function footer():array
     {
@@ -92,20 +110,67 @@ class MenuController extends Controller
         ];
     }
 
+    public function arr():array
+    {
+        return [
+            'path'      =>  [],
+            'menu'    =>  [],
+            'list'      =>  [],
+        ];
+    }
+
     public function getNameBySlugAndProduct($slug,$product):array
     {
-        $arr    =   [];
+
+        $arr    =   $this->arr();
         $menu   =   $this->menu();
         foreach ($menu as &$value) {
             if ($value['url'] === ('/'.$slug) || $value['url'] === $slug) {
-                $list   =   $this->subMenu($value['id']);
-                foreach ($list as &$val) {
-                    if ($val['url'] === ('/'.$product) || $val['url'] === $product) {
-                        $arr    =   [[$value['title'],$value['url']],[$val['title'],$val['url']]];
-                        break;
+                $arr['path'][]  =   [
+                    $value['title'],
+                    $value['url'],
+                ];
+                $product    =   $this->category->getBySlug($product);
+                if ($product) {
+                    $arr['path'][]  =   [
+                        $product['title'],
+                        $product['url']
+                    ];
+                    $arr['list']    =   $this->menu->getByCategoryId($product[ProductContract::ID]);
+                }
+            }
+        }
+
+        return $arr;
+    }
+
+    public function getItems($slug,$product,$item):array {
+        $arr    =   $this->arr();
+        $menu   =   $this->menu();
+        foreach ($menu as &$value) {
+            if ($value['url'] === ('/'.$slug) || $value['url'] === $slug) {
+                $arr['path'][]  =   [
+                    $value['title'],
+                    $value['url'],
+                ];
+                $product    =   $this->category->getBySlug($product);
+                if ($product) {
+                    $arr['path'][]  =   [
+                        $product['title'],
+                        $product['url']
+                    ];
+                    $item   =   $this->menu->getBySlug($item);
+                    if ($item) {
+                        $arr['path'][]  =   [
+                            $item['title'],
+                            $item['url']
+                        ];
+                        $arr['menu']  =   $this->product->structure($this->skip,$this->take);
+                        $arr['menu']['filter']['price']['min']  =   $this->product->minPrice($item[MenuContract::ID]);
+                        $arr['menu']['filter']['price']['max']  =   $this->product->maxPrice($item[MenuContract::ID]);
+                        $arr['menu']['filter']['options']       =   $this->filter->getByMenu($item[ProductContract::ID]);
                     }
                 }
-                break;
             }
         }
         return $arr;

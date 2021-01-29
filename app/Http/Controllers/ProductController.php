@@ -36,8 +36,11 @@ class ProductController extends Controller
         $arr        =   $this->product->structure($this->skip,$this->take);
         $category   =   $this->category->getBySlug($category);
 
+
+
         if ($category) {
             $menu   =   $this->menu->getByCategoryIdWithFilter($category[CategoryContract::ID]);
+            $arr    =   [];
             foreach ($menu as &$item) {
                 foreach ($item['filter'] as &$filter) {
                     $arr['filter']['options'][$filter['id']]   =   $filter;

@@ -7,6 +7,17 @@ use App\Contracts\MenuContract;
 
 class MenuRepositoryEloquent implements MenuRepositoryInterface
 {
+    public function getBySlug(string $slug):array
+    {
+        $menu   =   Menu::where([
+            [MenuContract::URL,'/'.$slug],
+            [MenuContract::STATUS,MenuContract::ACTIVE]
+        ])->first();
+        if ($menu) {
+            return $menu->toArray();
+        }
+        return [];
+    }
 
     public function getByCategoryId(int $categoryId):array
     {
