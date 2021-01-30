@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a8da848-8a7f-48a1-81f5-1c5468eb24fa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Repositories/filter/FilterRepositoryEloquent.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/filter/FilterRepositoryInterface.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/CharacteristicCrudController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/CharacteristicCrudController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MenuController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MenuController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Repositories/Category/CategoryRepositoryEloquent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Category/CategoryRepositoryEloquent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Menu/MenuRepositoryEloquent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Menu/MenuRepositoryEloquent.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Repositories/Product/ProductRepositoryEloquent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Product/ProductRepositoryEloquent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_28_080904_characteristics.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_28_080904_characteristics.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/filter/FilterRepositoryEloquent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/filter/FilterRepositoryEloquent.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,7 +206,7 @@
       <workItem from="1611569484033" duration="763000" />
       <workItem from="1611571627948" duration="10573000" />
       <workItem from="1611643379843" duration="64451000" />
-      <workItem from="1611910689942" duration="10667000" />
+      <workItem from="1611910689942" duration="15245000" />
     </task>
     <servers />
   </component>

@@ -4,7 +4,9 @@
 namespace App\Repositories\filter;
 
 
+use App\Contracts\CharacteristicContract;
 use App\Contracts\FilterContract;
+use App\Models\Characteristic;
 use App\Models\Filter;
 
 class FilterRepositoryEloquent implements FilterRepositoryInterface
@@ -31,7 +33,16 @@ class FilterRepositoryEloquent implements FilterRepositoryInterface
     public function filterList(int $id):array
     {
         $arr    =   [];
-
+        $characteristics    =   Characteristic::where([
+            [CharacteristicContract::FILTER_ID,$id],
+            [CharacteristicContract::STATUS,CharacteristicContract::ACTIVE]
+        ])->get()->toArray();
+        foreach ($characteristics as &$characteristic) {
+            $arr[]  =   [
+                CharacteristicContract::ID      =>  $characteristic[CharacteristicContract::FILTER_ID],
+                CharacteristicContract::TITLE   =>  $characteristic[CharacteristicContract::TITLE]
+            ];
+        }
         return $arr;
     }
 }

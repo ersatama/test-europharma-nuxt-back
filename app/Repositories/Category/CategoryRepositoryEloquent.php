@@ -15,7 +15,7 @@ class CategoryRepositoryEloquent implements CategoryRepositoryInterface
             [CategoryContract::URL,'/'.$slug],
             [CategoryContract::STATUS,CategoryContract::ACTIVE]
         ])->first();
-        if (sizeof($categories) > 0) {
+        if ($categories) {
             return  $categories->toArray();
         }
         return [];

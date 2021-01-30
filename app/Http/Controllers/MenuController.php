@@ -169,6 +169,7 @@ class MenuController extends Controller
                         $arr['menu']['filter']['price']['min']  =   $this->product->minPrice($item[MenuContract::ID]);
                         $arr['menu']['filter']['price']['max']  =   $this->product->maxPrice($item[MenuContract::ID]);
                         $arr['menu']['filter']['options']       =   $this->filter->getByMenu($item[ProductContract::ID]);
+                        $arr['list']    =   $this->product->getByMenuId($item[MenuContract::ID],$this->skip,$this->take);
                     }
                 }
             }

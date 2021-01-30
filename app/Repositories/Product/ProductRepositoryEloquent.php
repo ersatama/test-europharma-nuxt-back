@@ -11,6 +11,30 @@ use App\Models\Product;
 
 class ProductRepositoryEloquent implements ProductRepositoryInterface
 {
+    public function getByMenuId(int $menuId, int $skip, int $take): array
+    {
+        $products   =   Product::where([
+            [ProductContract::MENU_ID,$menuId],
+            [ProductContract::STATUS,ProductContract::ACTIVE]
+        ])->skip($skip)->take($take)->get()->toArray();
+        foreach ($products as &$product) {
+            $product['img'] =   [
+                [
+                    'img'   =>  'http://127.0.0.1:8000/img/img.png'
+                ],
+                [
+                    'img'   =>  'http://127.0.0.1:8000/img/img.png'
+                ],
+                [
+                    'img'   =>  'http://127.0.0.1:8000/img/img.png'
+                ],
+                [
+                    'img'   =>  'http://127.0.0.1:8000/img/img.png'
+                ]
+            ];
+        }
+        return array_merge($products,$products,$products);
+    }
 
     public function getProductsByFilter(array $filter):array
     {
