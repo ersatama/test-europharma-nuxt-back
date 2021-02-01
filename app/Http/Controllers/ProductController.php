@@ -10,6 +10,7 @@ use App\Repositories\Catalog\CatalogRepositoryEloquent as Catalog;
 use App\Repositories\Category\CategoryRepositoryEloquent as Category;
 use App\Repositories\Menu\MenuRepositoryEloquent as Menu;
 use App\Repositories\Product\ProductRepositoryEloquent as Product;
+use App\Repositories\Filter\FilterRepositoryEloquent as Filter;
 
 class ProductController extends Controller
 {
@@ -19,6 +20,7 @@ class ProductController extends Controller
     protected $category;
     protected $menu;
     protected $product;
+    protected $filter;
 
     protected $skip =   0;
     protected $take =   100;
@@ -28,6 +30,7 @@ class ProductController extends Controller
         $this->category =   new Category();
         $this->menu     =   new Menu();
         $this->product  =   new Product();
+        $this->filter   =   new Filter();
     }
 
     public function getProductsByCategory($category):array
@@ -82,12 +85,13 @@ class ProductController extends Controller
         return $arr;
     }
 
+    public function getBySlug(string $slug):array
+    {
+        return $this->product->getBySlug($slug);
+    }
+
     public function special():array {
-        $arr    =   [];
-        for ($i=0;$i < 100; $i++) {
-            $arr[]  =   $this->getById($i);
-        }
-        return $arr;
+        return $this->product->special($this->skip,$this->take);
     }
 
     public function getLimit($request): int
@@ -101,12 +105,7 @@ class ProductController extends Controller
 
     public function popular(Request $request):array
     {
-        $limit  =   $this->getLimit($request);
-        $arr    =   [];
-        for ($i=0;$i < $limit; $i++) {
-            $arr[]  =   $this->getById($i);
-        }
-        return $arr;
+        return $this->product->popular($this->skip,$this->take);
     }
 
     public function getById(int $id):array

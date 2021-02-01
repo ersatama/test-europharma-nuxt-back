@@ -8,6 +8,7 @@ Route::get('/web/menu/slug/{slug}','App\Http\Controllers\MenuController@getNameB
 Route::get('/web/menu/slug/{slug}/{product}','App\Http\Controllers\MenuController@getNameBySlugAndProduct');
 Route::get('/web/menu/slug/{slug}/{product}/{item}','App\Http\Controllers\MenuController@getItems');
 
+Route::get('/web/product/slug/{slug}','App\Http\Controllers\ProductController@getBySlug');
 Route::get('/web/products/popular','App\Http\Controllers\ProductController@popular');
 Route::get('/web/products/special','App\Http\Controllers\ProductController@special');
 //Route::get('/web/products/slug/{slug}','App\Http\Controllers\ProductController@getProductsByMenu');
