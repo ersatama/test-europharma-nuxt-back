@@ -107,7 +107,7 @@ class ProductRepositoryEloquent implements ProductRepositoryInterface
             [ProductContract::MENU_ID,$menuId],
             [ProductContract::STATUS,ProductContract::ACTIVE]
         ])->skip($skip)->take($take)->get()->toArray();
-        $this->productImage($products);
+        $this->productsImage($products);
         return array_merge($products,$products,$products);
     }
 

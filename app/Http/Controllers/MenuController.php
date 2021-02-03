@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\Catalog;
 use App\Contracts\CatalogContract;
 use App\Repositories\Product\ProductRepositoryEloquent as ProductEloquent;
+use App\Repositories\Catalog\CatalogRepositoryEloquent as CatalogEloquent;
 use App\Repositories\Category\CategoryRepositoryEloquent as CategoryEloquent;
 use App\Repositories\Menu\MenuRepositoryEloquent as MenuEloquent;
 use App\Repositories\Filter\FilterRepositoryEloquent as FilterEloquent;
@@ -22,6 +23,7 @@ class MenuController extends Controller
     protected $category;
     protected $menu;
     protected $filter;
+    protected $catalog;
     protected $skip =   0;
     protected $take =   100;
 
@@ -30,6 +32,16 @@ class MenuController extends Controller
         $this->category =   new CategoryEloquent();
         $this->menu     =   new MenuEloquent();
         $this->filter   =   new FilterEloquent();
+        $this->catalog  =   new CatalogEloquent();
+    }
+
+    public function getPathTitle(string $catalog, string $category, string $menu):array
+    {
+        $arr    =   [];
+        $arr[]  =   $this->catalog->getBySlug($catalog);
+        $arr[]  =   $this->category->getBySlug($category);
+        $arr[]  =   $this->menu->getBySlug($menu);
+        return $arr;
     }
 
     public function footer():array
